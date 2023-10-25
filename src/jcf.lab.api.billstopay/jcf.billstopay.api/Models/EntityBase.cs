@@ -13,5 +13,10 @@ namespace jcf.billstopay.api.Models
         public DateTime CreateAt { get; private set; } = DateTime.Now;
         public DateTime? UpdateAt { get; private set; }
         public bool IsActive { get; private set; } = true;
+
+        public void Updated()
+        {
+            UpdateAt = DateTime.Now;
+        }
     }
 }

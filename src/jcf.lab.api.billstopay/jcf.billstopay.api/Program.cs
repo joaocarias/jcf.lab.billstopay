@@ -1,4 +1,6 @@
 using jcf.billstopay.api.Data.Contexts;
+using jcf.billstopay.api.Data.Repositories;
+using jcf.billstopay.api.Data.Repositories.IRepositoires;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System;
@@ -38,6 +40,8 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 
 var app = builder.Build();
 

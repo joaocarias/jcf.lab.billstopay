@@ -2,7 +2,7 @@
 
 namespace jcf.billstopay.api.Data.Repositories
 {
-    public class UserRepository : IRepositoryBase<User>
+    public class UserRepository 
     {
         public UserRepository() { }
 

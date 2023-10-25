@@ -2,10 +2,21 @@
 
 namespace jcf.billstopay.api.Models
 {
-    public class Role(string roleName) : EntityBase()
+    public class Role : EntityBase
     {
         [Required]
         [StringLength(100)]
-        public string RoleName { get; set; } = roleName;
+        public string RoleName { get; private set; }
+
+        public Role(string roleName)
+        {
+            RoleName = roleName;
+        }
+
+        public void Update(string roleName)
+        {            
+            RoleName = roleName;
+            Updated();
+        }
     }
 }
