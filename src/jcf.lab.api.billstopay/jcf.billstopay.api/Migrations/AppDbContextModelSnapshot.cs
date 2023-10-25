@@ -39,14 +39,39 @@ namespace jcf.billstopay.api.Migrations
                     b.Property<DateTime?>("UpdateAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("UserId")
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("jcf.billstopay.api.Models.RoleUser", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid>("UserId")
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RoleId");
+
                     b.HasIndex("UserId");
 
-                    b.ToTable("Roles");
+                    b.ToTable("RoleUser");
                 });
 
             modelBuilder.Entity("jcf.billstopay.api.Models.User", b =>
@@ -89,16 +114,28 @@ namespace jcf.billstopay.api.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("jcf.billstopay.api.Models.Role", b =>
+            modelBuilder.Entity("jcf.billstopay.api.Models.RoleUser", b =>
                 {
-                    b.HasOne("jcf.billstopay.api.Models.User", null)
-                        .WithMany("Roles")
-                        .HasForeignKey("UserId");
+                    b.HasOne("jcf.billstopay.api.Models.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("jcf.billstopay.api.Models.User", "User")
+                        .WithMany("RolesUser")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("jcf.billstopay.api.Models.User", b =>
                 {
-                    b.Navigation("Roles");
+                    b.Navigation("RolesUser");
                 });
 #pragma warning restore 612, 618
         }

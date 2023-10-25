@@ -20,7 +20,7 @@ namespace jcf.billstopay.api.Models
         [StringLength(200)]
         public string Password { get; private set; }        
 
-        public IEnumerable<Role> Roles { get; private set; }
+        public IEnumerable<RoleUser> RolesUser { get; private set; }
 
         public User(string name, string email, string? userName, string password ) : base()
         {
@@ -28,14 +28,12 @@ namespace jcf.billstopay.api.Models
             Email = email;
             UserName = string.IsNullOrEmpty(userName) ? email : userName;
             Password = password;
-            Roles = new List<Role>();
+            RolesUser = new List<RoleUser>();
         }
 
-        public void SetRoles(IEnumerable<Role> roles)
+        public void SetRoles(IEnumerable<RoleUser> roles)
         {
-            Roles = roles;
+            RolesUser = roles;
         }
-
-
     }
 }
