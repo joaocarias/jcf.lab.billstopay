@@ -9,5 +9,7 @@ namespace jcf.billstopay.api.Data.Contexts
 
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }  
+        public DbSet<RoleUser> RoleUsers { get; set; }
+
     }
 }

@@ -1,24 +1,64 @@
-﻿using jcf.billstopay.api.Models;
+﻿using jcf.billstopay.api.Data.Contexts;
+using jcf.billstopay.api.Data.Repositories.IRepositoires;
+using jcf.billstopay.api.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace jcf.billstopay.api.Data.Repositories
 {
-    public class UserRepository 
+    public class UserRepository : IUserRepository
     {
-        public UserRepository() { }
+        private readonly AppDbContext _appDbContext;
+        private readonly ILogger<UserRepository> _logger;
 
-        public Task<User?> CreateAsync(User entity)
+        public UserRepository(AppDbContext appDbContext, ILogger<UserRepository> logger)
         {
-            throw new NotImplementedException();
+            _appDbContext = appDbContext;
+            _logger = logger;
         }
 
-        public Task<User?> GeyAsync(User id)
+        public async Task<User?> CreateAsync(User entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _appDbContext.Users.AddAsync(entity);
+                await _appDbContext.SaveChangesAsync();
+
+                return entity;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return null;
+            }
         }
 
-        public Task<User?> Update(User entity)
+        public async Task<User?> GetAsync(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await _appDbContext.Users.Where(_ => _.Id.Equals(id)).AsNoTracking().SingleOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return null;
+            }
+        }
+
+        public User? Update(User entity)
+        {
+            try
+            {
+                _appDbContext.Users.Update(entity);
+                _appDbContext.SaveChanges();
+
+                return entity;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return null;
+            }
         }
     }
 }

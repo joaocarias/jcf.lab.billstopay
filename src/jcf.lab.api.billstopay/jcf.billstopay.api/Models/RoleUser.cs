@@ -6,5 +6,13 @@
         public User User { get; private set; }
         public Guid RoleId { get; private set; }
         public Role Role { get; private set; }
+
+        public RoleUser() { }
+
+        public RoleUser(Role role)
+        {
+            RoleId = role.Id;
+            Role = role;
+        }
     }
 }

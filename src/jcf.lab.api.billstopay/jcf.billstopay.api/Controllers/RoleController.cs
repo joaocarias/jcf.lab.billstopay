@@ -1,6 +1,7 @@
 using jcf.billstopay.api.Data.Repositories.IRepositoires;
 using jcf.billstopay.api.Models;
 using jcf.billstopay.api.Models.ViewModels.Role;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
@@ -8,8 +9,9 @@ using System.Net;
 namespace jcf.billstopay.api.Controllers
 {
     [ApiController]
+    [Authorize(Roles = "ADMIN")]
     [Route("[controller]/[action]")]
-    public class RoleController : ControllerBase
+    public class RoleController : MyController
     {
         private readonly ILogger<RoleController> _logger;
         private readonly IRoleRepository _roleRepository;

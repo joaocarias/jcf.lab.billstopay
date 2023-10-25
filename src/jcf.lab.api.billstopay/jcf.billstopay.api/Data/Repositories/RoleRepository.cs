@@ -58,6 +58,19 @@ public class RoleRepository : IRoleRepository
         }
     }
 
+    public async Task<Role?> GetByName(string name)
+    {
+        try
+        {
+            return await _appDbContext.Roles.Where(_ => _.RoleName.ToUpper().Equals(name.ToUpper())).AsNoTracking().FirstOrDefaultAsync();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message);
+            return null;
+        }
+    }
+
     public Role? Update(Role entity)
     {
         try
