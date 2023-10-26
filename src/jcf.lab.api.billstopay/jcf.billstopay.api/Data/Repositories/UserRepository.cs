@@ -16,6 +16,19 @@ namespace jcf.billstopay.api.Data.Repositories
             _logger = logger;
         }
 
+        public async Task<User?> AuthenticateAsync(string userName, string password)
+        {
+            try
+            {
+                return await _appDbContext.Users.Where(_ => _.UserName.Equals(userName) && _.Password.Equals(password) && _.IsActive).AsNoTracking().SingleOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return null;
+            }
+        }
+
         public async Task<User?> CreateAsync(User entity)
         {
             try

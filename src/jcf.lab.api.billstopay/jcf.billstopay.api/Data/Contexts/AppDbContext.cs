@@ -8,8 +8,6 @@ namespace jcf.billstopay.api.Data.Contexts
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Role> Roles { get; set; }  
-        public DbSet<RoleUser> RoleUsers { get; set; }
 
     }
 }

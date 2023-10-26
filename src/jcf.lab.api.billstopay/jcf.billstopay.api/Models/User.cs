@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using jcf.billstopay.api.Utils;
+using System.ComponentModel.DataAnnotations;
 
 namespace jcf.billstopay.api.Models
 {
@@ -20,7 +21,7 @@ namespace jcf.billstopay.api.Models
         [StringLength(200)]
         public string Password { get; private set; }        
 
-        public IEnumerable<RoleUser> RolesUser { get; set; }
+        public string Role { get; private set; }
 
         public User(string name, string email, string? userName, string password ) : base()
         {
@@ -28,21 +29,9 @@ namespace jcf.billstopay.api.Models
             Email = email;
             UserName = string.IsNullOrEmpty(userName) ? email : userName;
             Password = password;
-            RolesUser = new List<RoleUser>();
+            Role = ConstantsUtil.BASIC;
         }
-
-        public void AddRoles(Role role)
-        {
-            try
-            {
-                RolesUser ??= new List<RoleUser>();
-                RolesUser.ToList().Add(new (role));
-            }catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }            
-        }
-
+                
         public void Update(string name, string email, string? userName)
         {
             Name = name;
