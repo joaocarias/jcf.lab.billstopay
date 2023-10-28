@@ -5,14 +5,21 @@
           <div class="card col-lg-4 mx-auto">
             <div class="card-body px-5 py-5">
               <h3 class="card-title text-left mb-3">Login</h3>
-              <form>
+             
+              <form [formGroup]="form">
                 <div class="form-group">
                   <label>Username *</label>
-                  <input type="text" class="form-control p_input">
+                  <input type="text" class="form-control p_input"
+                    formControlName="username" 
+                    [ngClass]="{ 'is-invalid': (!form.controls.username.valid && !form.controls.username.pristine) }"
+                     placeholder="Username">
                 </div>
                 <div class="form-group">
                   <label>Senha *</label>
-                  <input type="password" class="form-control p_input">
+                  <input 
+                    formControlName="password"
+                    [ngClass]="{ 'is-invalid': (!form.controls.password.valid && !form.controls.password.pristine) }"
+                    type="password" class="form-control p_input" placeholder="senha">
                 </div>
                 <div class="form-group d-flex align-items-center justify-content-between">
                   <div class="form-check">
@@ -22,10 +29,11 @@
                   <a href="#" class="forgot-pass">Recuperar Senha</a>
                 </div>
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary btn-block enter-btn" (click)="submit()" >Login</button>
+                  <button type="submit" class="btn btn-primary btn-block enter-btn" [disabled]="form.invalid" (click)="submit()" >Login</button>
                 </div>              
                 <p class="sign-up">Não tem uma Conta ainda?<a [routerLink]="['/signup']"> Cadastre-se</a></p>
               </form>
+            
             </div>
           </div>
         </div>

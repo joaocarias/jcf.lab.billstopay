@@ -80,8 +80,6 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddResponseCaching();
 
-
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -89,6 +87,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(option =>
+ option.AllowAnyOrigin()
+ .WithHeaders("accept", "content-type", "origin")
+ .AllowAnyMethod()
+ );
 
 app.UseHttpsRedirection();
 

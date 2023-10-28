@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginPageComponent } from './pages/account/login-page/login-page.component';
+
 import { SignupPageComponent } from './pages/account/signup-page/signup-page.component';
 import { HomeComponent } from './pages/manager/home/home.component';
 import { FrameDashboardPageComponent } from './pages/master/frame-dashboard-page/frame-dashboard-page.component';
+import { LoginPageComponent } from './pages/account/login-page/login-page.component';
 
 const routes: Routes = [
   
