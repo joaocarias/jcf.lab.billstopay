@@ -16,20 +16,27 @@ namespace jcf.billstopay.api.Services
             _configuration = configuration;
         }
 
+        public ClaimsIdentity GenerateClaims(User user)
+        {
+            var cli = new ClaimsIdentity(new[]
+                  {
+                    new Claim("ID", user.Id.ToString()),
+                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(ClaimTypes.Role, user.Role.ToUpper()),
+                    new Claim("NAME_USER", user.Name)
+                });
+
+            return cli;
+
+        }
+
         public string GenerateToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_configuration["Authentication:Jwt:Key"]);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[]
-                {
-                    new Claim("ID", user.Id.ToString()),
-                    new Claim(ClaimTypes.Name, user.UserName),
-                    new Claim(ClaimTypes.Role, user.Role.ToUpper()),
-                    new Claim("NAME_USER", user.Name)
-                }),
-
+                Subject = GenerateClaims(user),
                 Expires = DateTime.UtcNow.AddDays(8),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
 

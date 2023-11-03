@@ -5,28 +5,42 @@
           <div class="card col-lg-4 mx-auto">
             <div class="card-body px-5 py-5">
               <h3 class="card-title text-left mb-3">Cadastre-se</h3>
-              <form>         
+              <form [formGroup]="form">         
                 <div class="form-group">
                     <label>Nome Completo</label>
-                    <input type="text" class="form-control p_input">
+                    <input type="text" class="form-control p_input"
+                      formControlName="namefull"
+                      [ngClass]="{ 'is-invalid': (!form.controls.namefull.valid && !form.controls.namefull.pristine) }"
+                      placeholder="Nome Completo"
+                    >
                   </div>    
                 <div class="form-group">
                   <label>E-mail</label>
-                  <input type="email" class="form-control p_input">
+                  <input type="email" class="form-control p_input"
+                    formControlName="email"
+                    [ngClass]="{ 'is-invalid': (!form.controls.email.valid && !form.controls.email.pristine) }"
+                    placeholder="E-mail"
+                  >
                 </div>
                 <div class="form-group">
                   <label>Senha</label>
-                  <input type="password" class="form-control p_input">
+                  <input type="password" class="form-control p_input"
+                  formControlName="password"
+                    [ngClass]="{ 'is-invalid': (!form.controls.password.valid && !form.controls.password.pristine) }"
+                  >
                 </div>               
                 <div class="form-group">
                     <label>Confirmar Senha</label>
-                    <input type="password" class="form-control p_input">
+                    <input type="password" class="form-control p_input"
+                      formControlName="password_check"
+                      [ngClass]="{ 'is-invalid': (!form.controls.password_check.valid && !form.controls.password_check.pristine) }"
+                    >
                   </div>               
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary btn-block enter-btn">Cadastrar</button>
+                  <button type="submit" class="btn btn-primary btn-block enter-btn" [disabled]="form.invalid" (click)="submit()" >Cadastrar</button>
                 </div>
-                <p class="sign-up text-center">Já tem uma conta?<a [routerLink]="['/login']"> Faça Login</a></p>                
-                <p class="terms">Quando criado uma conta você estará aceitando com nossos<a href="#"> Termos e Condições</a></p>
+                <p class="sign-up text-center">Já tem uma conta? <a [routerLink]="['/login']">Faça Login</a></p>                
+                <p class="terms">Quando criado uma conta você estará aceitando com nossos <a href="#">Termos e Condições</a></p>
               </form>
             </div>
           </div>

@@ -38,7 +38,7 @@ namespace jcf.billstopay.api.Controllers
                 var user = await _userRepository.CreateAsync(newUser);
                 if (user is null) BadRequest(new { statusCode = HttpStatusCode.BadGateway, error = true, message = "Error creating record!" });
 
-                return Created(user.Id.ToString(), new { response = user });
+                return Created(user.Id.ToString(), new { response = new { user.Name, user.UserName, user.Email, user.CreateAt } });
             }
             catch (Exception ex)
             {
