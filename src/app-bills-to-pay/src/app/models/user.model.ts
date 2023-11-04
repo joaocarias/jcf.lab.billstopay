@@ -5,7 +5,6 @@ export class User {
         public userName: string,
         public email: string | null,
         public password: string | null,
-    ){
-
-    }    
+        public firstName: string = ""
+    ){     }    
 }

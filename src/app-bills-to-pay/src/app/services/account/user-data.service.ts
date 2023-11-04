@@ -20,8 +20,7 @@ export class UserDataService{
         return headers;
     }
 
-    authenticate(data: any) {
-        console.log(data);
+    authenticate(data: any) {       
         return this.http.post(`${this.url}/User/Login`, data);
     }
 

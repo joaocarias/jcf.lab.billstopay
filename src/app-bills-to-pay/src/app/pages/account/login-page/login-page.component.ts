@@ -38,8 +38,8 @@ export class LoginPageComponent implements  OnInit  {
       .service
       .refreshToken()
       .subscribe({
-        next: (data: any) => {              
-          this.setUser(new User(data.Id, data.name, data.userName, null, null), data.token); 
+        next: (data: any) => {            
+          this.setUser(new User(data.Id, data.name, data.userName, null, null, data.firstName), data.token); 
         },
         error: (err) => {
           Security.clear();
@@ -53,8 +53,8 @@ export class LoginPageComponent implements  OnInit  {
         .service
         .authenticate(this.form.value)
         .subscribe({
-          next: (data: any) => {          
-            this.setUser(new User(data.Id, data.name, data.userName, null, null), data.token); 
+          next: (data: any) => {              
+            this.setUser(new User(data.Id, data.name, data.userName, null, null, data.firstName), data.token); 
           },
           error: (err) => {
             Security.clear();
@@ -63,7 +63,7 @@ export class LoginPageComponent implements  OnInit  {
   }
 
   setUser(user: User, token: string) {
-    Security.set(user, token);
+    Security.set(user, token);    
     this.router.navigate(['/manager']);
   }
 }

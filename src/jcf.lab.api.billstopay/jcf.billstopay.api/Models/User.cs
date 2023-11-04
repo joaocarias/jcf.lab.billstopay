@@ -1,5 +1,7 @@
-﻿using jcf.billstopay.api.Utils;
+﻿using jcf.billstopay.api.Extensions;
+using jcf.billstopay.api.Utils;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace jcf.billstopay.api.Models
 {
@@ -22,6 +24,9 @@ namespace jcf.billstopay.api.Models
         public string Password { get; private set; }        
 
         public string Role { get; private set; }
+
+        [NotMapped]
+        public string FirstName { get { return Name.FirstPart(); } }
 
         public User(string name, string email, string? userName, string password ) : base()
         {

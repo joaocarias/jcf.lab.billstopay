@@ -51,8 +51,8 @@ export class SignupPageComponent implements OnInit {
       .service
       .create(this.form.value)
       .subscribe({
-          next: (data: any) => {          
-          this.toastr.success("Olá "+ data.name +", Cadastro realizado com sucesso!", 'Bem-vindo!');
+          next: (data: any) => {         
+          this.toastr.success("Olá "+ data.name +", Cadastro realizado com sucesso!", 'Bem-vindo!');        
           this.router.navigate(['/login']);
         },
          error: (err) => {
